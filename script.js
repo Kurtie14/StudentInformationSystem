@@ -3,8 +3,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const studentTable = document.getElementById("studentTable");
 
     let students = [];
+    let editIndex = null; // Track index of student being edited
 
-    // Add Student
+    // Function to show Bootstrap Modal
+    function showModal(title, message) {
+        document.getElementById("alertModalTitle").textContent = title;
+        document.getElementById("alertModalBody").textContent = message;
+        new bootstrap.Modal(document.getElementById("alertModal")).show();
+    }
+
+    // Add or Update Student
     studentForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
@@ -15,11 +23,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (name && studentId && contact && course) {
             const student = { name, studentId, contact, course };
-            students.push(student);
+
+            if (editIndex === null) {
+                // Add New Student
+                students.push(student);
+                showModal("✅ Success", "Student added successfully!");
+            } else {
+                // Update Existing Student
+                students[editIndex] = student;
+                editIndex = null; // Reset edit mode
+                showModal("✏️ Updated", "Student record updated successfully!");
+            }
+
             renderTable();
             studentForm.reset();
         } else {
-            alert("Please fill in all fields.");
+            showModal("⚠️ Warning", "Please fill in all fields.");
         }
     });
 
@@ -53,12 +72,17 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("contact").value = student.contact;
         document.getElementById("course").value = student.course;
 
-        deleteStudent(index);
+        editIndex = index; // Set edit index
+        showModal("✏️ Edit Mode", "Update the fields and click 'Add Student' to save changes.");
     };
 
     // Delete Student
     window.deleteStudent = function (index) {
-        students.splice(index, 1);
-        renderTable();
+        const confirmDelete = confirm("❌ Are you sure you want to delete this student?");
+        if (confirmDelete) {
+            students.splice(index, 1);
+            renderTable();
+            showModal("🗑️ Deleted", "Student record deleted.");
+        }
     };
 });
