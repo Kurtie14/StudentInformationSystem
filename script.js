@@ -2,23 +2,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const studentForm = document.getElementById("studentForm");
     const studentTable = document.getElementById("studentTable");
     const submitButton = document.querySelector("button[type='submit']");
+    const clearButton = document.querySelector("button[type='reset']");
     
     let students = JSON.parse(localStorage.getItem("students")) || [];
     let editIndex = null;
 
-    // Function to show Bootstrap Modal
     function showModal(title, message) {
         document.getElementById("alertModalTitle").textContent = title;
         document.getElementById("alertModalBody").textContent = message;
         new bootstrap.Modal(document.getElementById("alertModal")).show();
     }
 
-    // Function to save to Local Storage
     function saveToLocalStorage() {
         localStorage.setItem("students", JSON.stringify(students));
     }
 
-    // Render Table
     function renderTable() {
         studentTable.innerHTML = "";
         students.forEach((student, index) => {
@@ -29,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${student.contact}</td>
                 <td>${student.course}</td>
                 <td>
-                    <button class="btn btn-warning" onclick="editStudent(${index})">✏️ Edit</button>
+                    <button class="btn btn-warning me-2" onclick="editStudent(${index})">✏️ Edit</button>
                     <button class="btn btn-danger" onclick="deleteStudent(${index})">🗑️ Delete</button>
                 </td>
             `;
@@ -37,8 +35,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         saveToLocalStorage();
     }
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        let filter = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#studentTable tr");
+    
+        rows.forEach(row => {
+            let text = row.textContent.toLowerCase();
+            row.style.display = text.includes(filter) ? "" : "none";
+        });
+    });
 
-    // Add or Update Student
     studentForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
@@ -52,13 +58,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Validate Contact Number (10-digit only)
         if (!/^\d{11}$/.test(contact)) {
             showModal("⚠️ Warning", "Please enter a valid 11-digit contact number.");
             return;
         }
 
-        // Check for Duplicate Student ID (Only when adding new, not updating)
         if (editIndex === null && students.some(student => student.studentId === studentId)) {
             showModal("⚠️ Warning", "A student with this ID already exists.");
             return;
@@ -72,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             students[editIndex] = student;
             editIndex = null;
-            submitButton.textContent = "Add Student"; // Reset button text
+            submitButton.textContent = "Add Student";
             showModal("✏️ Updated", "Student record updated successfully!");
         }
 
@@ -80,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
         studentForm.reset();
     });
 
-    // Edit Student
     window.editStudent = function (index) {
         const student = students[index];
 
@@ -90,11 +93,10 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("course").value = student.course;
 
         editIndex = index;
-        submitButton.textContent = "Update Student"; // Change button text in edit mode
+        submitButton.textContent = "Update Student";
         showModal("✏️ Edit Mode", "Update the fields and click 'Update Student' to save changes.");
     };
 
-    // Delete Student
     window.deleteStudent = function (index) {
         if (confirm("❌ Are you sure you want to delete this student?")) {
             students.splice(index, 1);
@@ -103,6 +105,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // Load initial data
+    clearButton.addEventListener("click", function () {
+        editIndex = null;
+        submitButton.textContent = "Add Student";
+    });
+
     renderTable();
 });
