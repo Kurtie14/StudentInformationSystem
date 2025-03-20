@@ -21,27 +21,34 @@
 
         <!-- Student Form -->
         <div class="card p-4 shadow-lg">
-            <form id="studentForm">
-                <div class="mb-3">
-                    <label class="form-label">Name:</label>
-                    <input type="text" id="name" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">ID:</label>
-                    <input type="text" id="studentId" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Contact:</label>
-                    <input type="text" id="contact" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Course/Grade:</label>
-                    <input type="text" id="course" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-success">Add Student</button>
-            </form>
+            <!-- Add a "Clear" Button inside the form -->
+        <!-- Student Form -->
+        <div class="d-flex justify-content-center mt-4">
+            <div class="card shadow-lg">
+                <form id="studentForm">
+                    <div class="mb-3">
+                        <label class="form-label">Name:</label>
+                        <input type="text" id="name" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">ID:</label>
+                        <input type="text" id="studentId" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Contact:</label>
+                        <input type="text" id="contact" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Course/Grade:</label>
+                        <input type="text" id="course" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Add Student</button>
+                    <button type="reset" class="btn btn-secondary w-100 mt-2">Clear</button>
+                </form>
+            </div>
         </div>
 
+        </div>
         <!-- Student Table -->
         <div class="mt-4">
             <table class="table table-bordered table-hover">

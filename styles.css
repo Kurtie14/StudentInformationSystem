@@ -22,3 +22,21 @@ body {
 .btn-danger {
     background-color: #BF3131 !important; /* Red for delete */
 }
+
+.btn-warning {
+    background-color: #EAD196 !important; /* Yellow for edit */
+}
+
+/* Centering the table */
+.container {
+    max-width: 800px;
+}
+/* Adjust the form width to a normal size */
+.card {
+    background-color: #7A73D1; /* Light Purple */
+    border: 2px solid #B5A8D5;
+    max-width: 600px; /* Normal width */
+    margin: auto; /* Center the form */
+    padding: 20px;
+}
+
