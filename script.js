@@ -35,6 +35,21 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         saveToLocalStorage();
     }
+    document.getElementById("toggleForm").addEventListener("click", function() {
+        var formContainer = document.getElementById("formContainer");
+        var buttonContainer = document.getElementById("buttonContainer");
+    
+        if (formContainer.style.display === "none") {
+            formContainer.style.display = "block";
+            buttonContainer.classList.remove("button-right");
+            this.textContent = "Hide Form";
+        } else {
+            formContainer.style.display = "none";
+            buttonContainer.classList.add("button-right");
+            this.textContent = "Show Form";
+        }
+    });
+    
     document.getElementById("searchInput").addEventListener("keyup", function () {
         let filter = this.value.toLowerCase();
         let rows = document.querySelectorAll("#studentTable tr");

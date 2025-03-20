@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Information System</title>
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
@@ -13,7 +13,7 @@
 
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center bg-primary p-3 rounded">
-            <h2 class="text-white m-0 text-3xl font-bold">Student Information System</h2>
+            <h2 class="text-white m-0 text-3xl font-bold"><i class="fab fa-html5 fa-2 text-red-600 mb-4"></i><span> </span>Student Information System</h2>
             <div class="d-flex align-items-center w-25">
                 <input type="text" id="searchInput" class="form-control text-center" placeholder="Search Student...">
             </div>
@@ -21,26 +21,51 @@
 
         <div class="d-flex justify-content-center mt-4">
             <div class="card shadow-lg">
-                <form id="studentForm">
-                    <div class="mb-3">
-                        <label class="form-label">Name:</label>
-                        <input type="text" id="name" class="form-control" placeholder="Full Name">
+                <button id="toggleForm" class="btn btn-primary mb-3">Show Form</button>
+
+                <div id="formContainer" style="display: none;">
+                    <div class="border p-3 rounded">
+                        <form id="studentForm">
+                            <div class="row mb-3">
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Name:</label>
+                                    <input type="text" id="name" class="form-control" placeholder="Full Name">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">ID:</label>
+                                    <input type="text" id="studentId" class="form-control" placeholder="ID Number">
+                                </div>
+                            </div>
+                
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Contact:</label>
+                                    <input type="text" id="contact" class="form-control" placeholder="Enter Contact Number">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Course/Grade:</label>
+                                    <select id="course" class="form-select">
+                                        <option value="" disabled selected>Select Course</option>
+                                        <option value="BSIS">BSIS</option>
+                                        <option value="CRIM">CRIM</option>
+                                        <option value="EDUC">EDUC</option>
+                                        <option value="ARTS">ARTS</option>
+                                    </select>
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-success w-100">Add Student</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="reset" class="btn btn-secondary w-100">Clear</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">ID:</label>
-                        <input type="text" id="studentId" class="form-control" placeholder="ID Number">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Contact:</label>
-                        <input type="text" id="contact" class="form-control" placeholder="Enter Contact Number">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Course/Grade:</label>
-                        <input type="text" id="course" class="form-control" placeholder="Enter Course or Grade">
-                    </div>
-                    <button type="submit" class="btn btn-success w-100">Add Student</button>
-                    <button type="reset" class="btn btn-secondary w-100 mt-2">Clear</button>
-                </form>
+                </div>
             </div>
         </div>
 
