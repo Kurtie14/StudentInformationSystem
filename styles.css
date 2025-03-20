@@ -1,0 +1,24 @@
+/* Applying Color Palette */
+body {
+    background-color: #211C84; /* Dark Blue Background */
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    background-color: #7A73D1; /* Light Purple */
+    border: 2px solid #B5A8D5;
+}
+
+.table th {
+    background-color: #4D55CC !important; /* Medium Blue */
+}
+
+.btn-success {
+    background-color: #B5A8D5 !important; /* Light Purple */
+    border-color: #7A73D1;
+}
+
+.btn-danger {
+    background-color: #BF3131 !important; /* Red for delete */
+}
